@@ -5,7 +5,7 @@ export default function Register() {
   return (
     <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
       <div className="container mx-auto">
-        <div className="flex flex-wrap -mx-4">
+        <div className="flex flex-wrap mx-4">
           <div className="w-full px-4">
             <div
               className="
@@ -127,7 +127,7 @@ export default function Register() {
                         border-primary
                         py-3
                         px-5
-                        bg-[#3a45e6]
+                        bg-blue-500
                         text-base text-white
                         cursor-pointer
                         hover:bg-opacity-90
