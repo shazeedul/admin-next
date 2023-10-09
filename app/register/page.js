@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Register() {
   return (
@@ -32,13 +33,29 @@ export default function Register() {
                     width={160}
                     height={40}
                   />
-                  {/* <img
-                    src="https://cdn.tailgrids.com/1.0/assets/images/logo/logo.svg"
-                    alt="logo"
-                  /> */}
                 </a>
               </div>
               <form>
+                <div className="mb-6">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="
+                        w-full
+                        rounded-md
+                        border
+                        border-[#E9EDF4]
+                        py-3
+                        px-5
+                        bg-[#FCFDFE]
+                        text-base text-body-color
+                        placeholder-[#ACB6BE]
+                        outline-none
+                        focus-visible:shadow-none
+                        focus:border-primary
+                        "
+                  />
+                </div>
                 <div className="mb-6">
                   <input
                     type="text"
@@ -79,10 +96,30 @@ export default function Register() {
                         "
                   />
                 </div>
+                <div className="mb-6">
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="
+                        w-full
+                        rounded-md
+                        border
+                        border-[#E9EDF4]
+                        py-3
+                        px-5
+                        bg-[#FCFDFE]
+                        text-base text-body-color
+                        placeholder-[#ACB6BE]
+                        outline-none
+                        focus-visible:shadow-none
+                        focus:border-primary
+                        "
+                  />
+                </div>
                 <div className="mb-10">
                   <input
                     type="submit"
-                    value="Sign In"
+                    value="Sign Up"
                     className="
                         w-full
                         rounded-md
@@ -90,7 +127,7 @@ export default function Register() {
                         border-primary
                         py-3
                         px-5
-                        bg-primary
+                        bg-[#3a45e6]
                         text-base text-white
                         cursor-pointer
                         hover:bg-opacity-90
@@ -137,33 +174,6 @@ export default function Register() {
                         items-center
                         justify-center
                         rounded-md
-                        bg-[#1C9CEA]
-                        hover:bg-opacity-90
-                        "
-                  >
-                    <svg
-                      width="22"
-                      height="16"
-                      viewBox="0 0 22 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.5516 2.75538L20.9 1.25245C21.2903 0.845401 21.3968 0.53229 21.4323 0.375734C20.3677 0.939335 19.3742 1.1272 18.7355 1.1272H18.4871L18.3452 1.00196C17.4935 0.344423 16.429 0 15.2935 0C12.8097 0 10.8581 1.81605 10.8581 3.91389C10.8581 4.03914 10.8581 4.22701 10.8935 4.35225L11 4.97847L10.2548 4.94716C5.7129 4.82192 1.9871 1.37769 1.38387 0.782779C0.390323 2.34834 0.958064 3.85127 1.56129 4.79061L2.76774 6.54403L0.851613 5.6047C0.887097 6.91977 1.45484 7.95303 2.55484 8.7045L3.5129 9.33072L2.55484 9.67515C3.15806 11.272 4.50645 11.9296 5.5 12.18L6.8129 12.4932L5.57097 13.2446C3.58387 14.4971 1.1 14.4031 0 14.3092C2.23548 15.6869 4.89677 16 6.74194 16C8.12581 16 9.15484 15.8748 9.40322 15.7808C19.3387 13.7143 19.8 5.8865 19.8 4.32094V4.10176L20.0129 3.97652C21.2194 2.97456 21.7161 2.44227 22 2.12916C21.8935 2.16047 21.7516 2.22309 21.6097 2.2544L19.5516 2.75538Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </a>
-                </li>
-                <li className="px-2 w-full">
-                  <a
-                    href="javascript:void(0)"
-                    className="
-                        flex
-                        h-11
-                        items-center
-                        justify-center
-                        rounded-md
                         bg-[#D64937]
                         hover:bg-opacity-90
                         "
@@ -183,26 +193,11 @@ export default function Register() {
                   </a>
                 </li>
               </ul>
-              <a
-                href="javascript:void(0)"
-                className="
-                  text-base
-                  inline-block
-                  mb-2
-                  text-[#adadad]
-                  hover:underline hover:text-primary
-                  "
-              >
-                Forget Password?
-              </a>
               <p className="text-base text-[#adadad]">
-                Not a member yet?
-                <a
-                  href="javascript:void(0)"
-                  className="text-primary hover:underline"
-                >
-                  Sign Up
-                </a>
+                Already a member?
+                <Link href={`/login`} className="text-primary hover:underline">
+                  Sign In
+                </Link>
               </p>
               <div>
                 <span className="absolute top-1 right-1">
