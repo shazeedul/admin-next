@@ -44,6 +44,7 @@ export default function Login() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5
@@ -64,6 +65,7 @@ export default function Login() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5

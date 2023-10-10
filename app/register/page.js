@@ -44,6 +44,7 @@ export default function Register() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5
@@ -64,6 +65,7 @@ export default function Register() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5
@@ -84,6 +86,7 @@ export default function Register() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5
@@ -104,6 +107,7 @@ export default function Register() {
                         w-full
                         rounded-md
                         border
+                        text-black
                         border-[#E9EDF4]
                         py-3
                         px-5
@@ -124,7 +128,7 @@ export default function Register() {
                         w-full
                         rounded-md
                         border
-                        border-primary
+                        border-blue-500
                         py-3
                         px-5
                         bg-blue-500
