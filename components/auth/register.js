@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { registerApi } from "@/app/Redux/Features/Auth/authSlice";
+import { useDispatch } from "react-redux";
 import Error from "./inputError";
 
 export default function Register() {
@@ -12,7 +14,8 @@ export default function Register() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const dispatch = useDispatch();
+  const onSubmit = (data) => dispatch(registerApi(data));
 
   return (
     <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
