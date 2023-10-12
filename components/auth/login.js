@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { loginApi } from "@/app/Redux/Features/Auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Error from "./inputError";
 
 export default function Login() {

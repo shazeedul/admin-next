@@ -43,42 +43,42 @@ export const registerApi = createAsyncThunk('auth/register', async (userData) =>
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: {
-    [loginApi.fulfilled]: (state, action) => {
-      state.user = action.payload.data;
-      state.token = action.payload.token;
-      state.isAuthenticated = true;
-    },
-    [registerApi.fulfilled]: (state, action) => {
-      state.user = action.payload.data;
-      state.token = action.payload.token;
-      state.isAuthenticated = true;
-    },
-
-    [loginApi.rejected]: (state, action) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-    },
-    [registerApi.rejected]: (state, action) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-    },
-
-    [loginApi.pending]: (state, action) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-    },
-    [registerApi.pending]: (state, action) => {
-      state.user = null;
-      state.token = null;
-      state.isAuthenticated = false;
-    },
+  reducers: (builder) => {
+    builder
+      .addCase(loginApi.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+      })
+      .addCase(registerApi.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+      })
+      .addCase(loginApi.rejected, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(registerApi.rejected, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(loginApi.pending, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(registerApi.pending, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+      });
   },
 });
 
-export const { setUser, setToken, logout } = authSlice.actions;
+export const selectUser = (state) => state.auth.user;
+export const selectToken = (state) => state.auth.token;
+export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export default authSlice.reducer;
