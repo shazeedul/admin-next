@@ -14,7 +14,7 @@ export default function SideBar() {
               <ul className="pb-2 space-y-2">
                 <li>
                   <form action="#" method="GET" className="lg:hidden">
-                    <label for="mobile-search" className="sr-only">
+                    <label htmlFor="mobile-search" className="sr-only">
                       Search
                     </label>
                     <div className="relative">
@@ -542,10 +542,10 @@ export default function SideBar() {
             <button
               type="button"
               data-dropdown-toggle="language-dropdown"
-              classname="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
-                classname="h-5 w-5 rounded-full mt-0.5"
+                className="h-5 w-5 rounded-full mt-0.5"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 3900 3900"
@@ -583,7 +583,6 @@ export default function SideBar() {
               </svg>
             </button>
 
-
             <div
               className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700"
               id="language-dropdown"
@@ -603,7 +602,7 @@ export default function SideBar() {
                         viewBox="0 0 512 512"
                       >
                         <g fill-rule="evenodd">
-                          <g stroke-width="1pt">
+                          <g strokeWidth="1pt">
                             <path
                               fill="#bd3d44"
                               d="M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0zm0 20h247v10H0z"
@@ -665,7 +664,7 @@ export default function SideBar() {
                         id="flag-icon-css-it"
                         viewBox="0 0 512 512"
                       >
-                        <g fill-rule="evenodd" stroke-width="1pt">
+                        <g fill-rule="evenodd" strokeWidth="1pt">
                           <path fill="#fff" d="M0 0h512v512H0z" />
                           <path fill="#009246" d="M0 0h170.7v512H0z" />
                           <path fill="#ce2b37" d="M341.3 0H512v512H341.3z" />
@@ -684,10 +683,10 @@ export default function SideBar() {
                     <button
                       type="button"
                       data-dropdown-toggle="language-dropdown"
-                      classname="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                      className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       <svg
-                        classname="h-5 w-5 rounded-full mt-0.5"
+                        className="h-5 w-5 rounded-full mt-0.5"
                         xmlns="http://www.w3.org/2000/svg"
                         xmlnsXlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 3900 3900"
@@ -724,7 +723,6 @@ export default function SideBar() {
                         </g>
                       </svg>
                     </button>
-
                   </a>
                 </li>
               </ul>

@@ -1,12 +1,16 @@
 import Footer from "@/components/dashboard/footer.jsx";
 import Navbar from "@/components/dashboard/navbar";
 import SideBar from "@/components/dashboard/sidebar.jsx";
+import Head from "next/head";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
 }) {
   return (
     <>
+      <Head>
+        <script async src="/index.js"></script>
+      </Head>
       <Navbar />
       <div className="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
         <SideBar />

@@ -206,7 +206,7 @@ export default function Register() {
                   />
 
                   <label
-                    for="terms"
+                    htmlFor="terms"
                     className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     I agree with the{" "}
