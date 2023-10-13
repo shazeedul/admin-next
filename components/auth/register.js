@@ -38,15 +38,13 @@ export default function Register() {
                "
             >
               <div className="mb-10 md:mb-16 text-center">
-                <a
-                  href="javascript:void(0)"
-                  className="inline-block max-w-[160px] mx-auto"
-                >
+                <a href="#" className="inline-block max-w-[160px] mx-auto">
                   <Image
                     src={`https://cdn.tailgrids.com/1.0/assets/images/logo/logo.svg`}
                     alt="logo"
                     width={160}
                     height={40}
+                    priority
                   />
                 </a>
               </div>
@@ -243,7 +241,7 @@ export default function Register() {
               <ul className="flex justify-between -mx-2 mb-12">
                 <li className="px-2 w-full">
                   <a
-                    href="javascript:void(0)"
+                    href="#"
                     className="
                         flex
                         h-11
@@ -270,7 +268,7 @@ export default function Register() {
                 </li>
                 <li className="px-2 w-full">
                   <a
-                    href="javascript:void(0)"
+                    href="#"
                     className="
                         flex
                         h-11

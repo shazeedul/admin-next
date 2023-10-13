@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
@@ -6,12 +6,12 @@ const initialState = {
   isAuthenticated: false,
 };
 
-export const loginApi = createAsyncThunk('auth/login', async (userData) => {
+export const loginApi = createAsyncThunk("auth/login", async (userData) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(userData),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
   const data = await response.json();
@@ -21,59 +21,68 @@ export const loginApi = createAsyncThunk('auth/login', async (userData) => {
   throw new Error(data.error);
 });
 
-export const registerApi = createAsyncThunk('auth/register', async (userData) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, {
-    method: 'POST',
-    body: JSON.stringify({
-      name: userData.username,
-      email: userData.email,
-      password: userData.password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await response.json();
-  if (response.ok) {
-    return data;
+export const registerApi = createAsyncThunk(
+  "auth/register",
+  async (userData) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/register`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: userData.username,
+          email: userData.email,
+          password: userData.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (response.ok) {
+      return data;
+    }
+    throw new Error(data.message);
   }
-  throw new Error(data.message);
-});
+);
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: (builder) => {
     builder
-      .addCase(loginApi.fulfilled, (state, action) => {
-        state.user = action.payload.data;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
+      .addCase(loginApi.pending, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+        console.log("pending", state.token);
       })
-      .addCase(registerApi.fulfilled, (state, action) => {
-        state.user = action.payload.data;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
+      .addCase(registerApi.pending, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
       })
       .addCase(loginApi.rejected, (state, action) => {
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
+        console.log("pending", state.token);
       })
       .addCase(registerApi.rejected, (state, action) => {
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
       })
-      .addCase(loginApi.pending, (state, action) => {
-        state.user = null;
-        state.token = null;
-        state.isAuthenticated = false;
+      .addCase(loginApi.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+        console.log("pending", state.token);
       })
-      .addCase(registerApi.pending, (state, action) => {
-        state.user = null;
-        state.token = null;
-        state.isAuthenticated = false;
+      .addCase(registerApi.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
       });
   },
 });
