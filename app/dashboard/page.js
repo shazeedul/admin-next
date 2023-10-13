@@ -4,5 +4,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <h1>Hello, Dashboard Page!</h1>;
+  return <h1 className="text-black dark:text-white">Hello, Dashboard Page!</h1>;
 }
