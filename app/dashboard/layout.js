@@ -4,16 +4,13 @@ import SideBar from "@/components/dashboard/sidebar.jsx";
 import Head from "next/head";
 import Script from "next/script";
 
-export default function DashboardLayout({
-  children, // will be a page or nested layout
-}) {
+export default function DashboardLayout({ children }) {
   return (
     <>
-      <Script src="./index.js" />
       <Script src="./sidebar.js" />
       <Script src="./dark-mode.js" />
       {/* <Script src="./charts.js" /> */}
-      <Script src="./constants.js" />
+      {/* <Script src="./constants.js" /> */}
       <Head>
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"

@@ -3,19 +3,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { loginApi } from "@/app/Redux/Features/Auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
 import Error from "./inputError";
+import { useDispatch } from "react-redux";
+import { clearUser, setUser } from "@/app/Redux/Features/Auth/authSlice";
+import { useLoginMutation } from "@/app/Redux/api/authApi";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+
   const dispatch = useDispatch();
-  const onSubmit = (data) => dispatch(loginApi(data));
+
+  const router = useRouter();
+
+  const [loginMutation, { isLoading, isError }] = useLoginMutation(); // Use the generated mutation
+
+  const onSubmit = async (data) => {
+    const response = await loginMutation(data)
+      .then((res) => {
+        dispatch(setUser({ user: res.data.data, token: res.data.token }));
+        router.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log("err", err);
+        dispatch(clearUser());
+      });
+  };
 
   return (
     <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">

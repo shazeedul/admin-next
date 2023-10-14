@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { registerApi } from "@/app/Redux/Features/Auth/authSlice";
+import { clearUser, setUser } from "@/app/Redux/Features/Auth/authSlice";
 import { useDispatch } from "react-redux";
 import Error from "./inputError";
+import { useRouter } from "next/navigation";
+import { useRegisterMutation } from "@/app/Redux/api/authApi";
 
 export default function Register() {
   const {
@@ -15,7 +17,27 @@ export default function Register() {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const onSubmit = (data) => dispatch(registerApi(data));
+  const router = useRouter();
+  const [registerMutation, { isLoading, isError }] = useRegisterMutation();
+  const onSubmit = async (data) => {
+    const { name, email, password } = data;
+    const userData = {
+      name,
+      email,
+      password,
+    };
+    const response = await registerMutation(userData)
+      .then((res) => {
+        if (res.data) {
+          dispatch(setUser({ user: res.data.data, token: res.data.token }));
+          router.push("/dashboard");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(clearUser());
+      });
+  };
 
   return (
     <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
@@ -68,13 +90,11 @@ export default function Register() {
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-                    {...register("username", {
+                    {...register("name", {
                       required: { value: true, message: "User Name Required" },
                     })}
                   />
-                  {errors.username && (
-                    <Error message={errors.username.message} />
-                  )}
+                  {errors.name && <Error message={errors.name.message} />}
                 </div>
                 <div className="mb-6">
                   <input
