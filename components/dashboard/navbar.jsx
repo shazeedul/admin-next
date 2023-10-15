@@ -4,29 +4,38 @@ import { clearUser } from "@/app/Redux/Features/Auth/authSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
 
-  function toggleDropdown(id) {
-    const dropdown = document.getElementById(id);
+  const [avatarDrop, setAvatarDrop] = useState(false);
+  const [notificationsDrop, setNotificationsDrop] = useState(false);
+  const [appsDrop, setAppsDrop] = useState(false);
 
-    if (dropdown) {
-      // Check if the current dropdown is hidden
-      const isHidden = dropdown.classList.contains("hidden");
+  const dropdownAvatarRef = useRef(null);
+  const dropdownNotificationsRef = useRef(null);
+  const dropdownAppsRef = useRef(null);
 
-      // Toggle all dropdowns with the "hidden" class
-      const allDropdowns = document.querySelectorAll(".dropdownSelector");
-      allDropdowns.forEach((item) => {
-        item.classList.add("hidden");
-      });
-
-      // If the current dropdown was hidden, remove the "hidden" class
-      if (isHidden) {
-        dropdown.classList.remove("hidden");
+  useEffect(() => {
+    const handler = (e) => {
+      if (!dropdownAvatarRef.current.contains(e.target)) {
+        setAvatarDrop(false);
       }
+      if (!dropdownNotificationsRef.current.contains(e.target)) {
+        setNotificationsDrop(false);
+      }
+      if (!dropdownAppsRef.current.contains(e.target)) {
+        setAppsDrop(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
     }
-  }
+  });
 
   const user = useSelector((state) => state.auth.user);
 
@@ -139,12 +148,14 @@ export default function Navbar() {
               </svg>
             </button>
             <button
+              ref={dropdownNotificationsRef}
               id="dropdownNotificationButton"
-              onClick={() => toggleDropdown("dropdownNotification")}
+              onClick={() => setNotificationsDrop(!notificationsDrop)}
               className="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
               type="button"
             >
               <svg
+                ref={dropdownNotificationsRef}
                 className="w-5 h-5"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -159,8 +170,9 @@ export default function Navbar() {
             </button>
             {/* Dropdown menu */}
             <div
+              ref={dropdownNotificationsRef}
               id="dropdownNotification"
-              className="z-20 hidden dropdownSelector w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
+              className={`z-20 w-full ${notificationsDrop ? '' : 'hidden'} max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`}
               aria-labelledby="dropdownNotificationButton"
               style={{
                 position: "absolute",
@@ -388,11 +400,14 @@ export default function Navbar() {
             </div>
             <button
               type="button"
+              ref={dropdownAppsRef}
               data-dropdown-toggle="apps-dropdown"
+              onClick={() => setAppsDrop(!appsDrop)}
               className="hidden p-2 text-gray-500 rounded-lg sm:flex hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
             >
               <span className="sr-only">View notifications</span>
               <svg
+                ref={dropdownAppsRef}
                 className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -402,8 +417,14 @@ export default function Navbar() {
               </svg>
             </button>
             <div
-              className="z-50 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+              className={`z-50 ${appsDrop ? '' : 'hidden'} max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600`}
               id="apps-dropdown"
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translate(-180px, 10px)",
+                width: "max-content",
+              }}
             >
               <div className="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 Apps
@@ -630,12 +651,14 @@ export default function Navbar() {
             </div>
             <button
               id="dropdownUserAvatarButton"
-              onClick={() => toggleDropdown("dropdownAvatar")}
+              ref={dropdownAvatarRef}
+              onClick={() => setAvatarDrop(!avatarDrop)}
               className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               type="button"
             >
               <span className="sr-only">Open user menu</span>
               <Image
+                ref={dropdownAvatarRef}
                 className="w-8 h-8 rounded-full"
                 src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                 alt="user photo"
@@ -645,8 +668,9 @@ export default function Navbar() {
             </button>
             {/* Dropdown menu */}
             <div
+              ref={dropdownAvatarRef}
               id="dropdownAvatar"
-              className="z-10 hidden dropdownSelector bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+              className={`z-10 ${avatarDrop ? '' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
               style={{
                 position: "absolute",
                 top: "70%",
@@ -684,6 +708,7 @@ export default function Navbar() {
               </ul>
               <div className="py-2">
                 <a
+                  style={{ cursor: 'pointer' }}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   onClick={signOut}
                 >

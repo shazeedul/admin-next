@@ -1,8 +1,25 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export default function SideBar() {
+
+  const [langDrop, setLangDrop] = useState(false);
+
+  const dropdownLangRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!dropdownLangRef.current.contains(e.target)) {
+        setLangDrop(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
   
   function toggleCollapsible(id) {
     const element = document.getElementById(id);
@@ -11,25 +28,6 @@ export default function SideBar() {
     }
   }
 
-  function toggleDropdown(id) {
-    const dropdown = document.getElementById(id);
-
-    if (dropdown) {
-      // Check if the current dropdown is hidden
-      const isHidden = dropdown.classList.contains("hidden");
-
-      // Toggle all dropdowns with the "hidden" class
-      const allDropdowns = document.querySelectorAll(".dropdownSelector");
-      allDropdowns.forEach((item) => {
-        item.classList.add("hidden");
-      });
-
-      // If the current dropdown was hidden, remove the "hidden" class
-      if (isHidden) {
-        dropdown.classList.remove("hidden");
-      }
-    }
-  }
   return (
     <>
       <aside
@@ -573,10 +571,12 @@ export default function SideBar() {
             </div>
             <button
               type="button"
-              onClick={() => toggleDropdown("language-dropdown")}
+              ref={dropdownLangRef}
+              onClick={() => setLangDrop(!langDrop)}
               className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
+                ref={dropdownLangRef}
                 className="h-5 w-5 rounded-full mt-0.5"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -615,7 +615,8 @@ export default function SideBar() {
               </svg>
             </button>
             <div
-              className="z-50 hidden dropdownSelector my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 "
+              ref={dropdownLangRef}
+              className={`z-50 ${langDrop ? '' : 'hidden'} my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700`}
               id="language-dropdown"
               style={{
                 position: "absolute",
@@ -716,7 +717,7 @@ export default function SideBar() {
         </div>
       </aside>
       <div
-        className="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90"
+        className="fixed inset-0 z-80 hidden bg-gray-900/50 dark:bg-gray-900/90"
         id="sidebarBackdrop"
       />
     </>
