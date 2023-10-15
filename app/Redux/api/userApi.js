@@ -5,9 +5,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const userApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   prepareHeaders: (headers, { getState }) => {
-    const { token } = getState().auth;
+    const token = getState().auth.token;
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set('authorization', `Bearer ${token}`)
     }
     return headers;
   },

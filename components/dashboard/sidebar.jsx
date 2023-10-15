@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function SideBar() {
@@ -20,10 +19,16 @@ export default function SideBar() {
       document.removeEventListener("mousedown", handler);
     };
   });
-  
+
   function toggleCollapsible(id) {
     const element = document.getElementById(id);
     if (element) {
+      const allCollapsible = document.querySelectorAll('.collapsible');
+      allCollapsible.forEach((item) => {
+        if (item !== element) {
+          item.classList.add('hidden');
+        }
+      });
       element.classList.toggle("hidden");
     }
   }
@@ -124,7 +129,7 @@ export default function SideBar() {
                       />
                     </svg>
                   </button>
-                  <ul id="dropdown-layouts" className="hidden py-2 space-y-2">
+                  <ul id="dropdown-layouts" className="collapsible hidden py-2 space-y-2">
                     <li>
                       <a
                         href="#"
@@ -183,7 +188,7 @@ export default function SideBar() {
                       />
                     </svg>
                   </button>
-                  <ul id="dropdown-crud" className="hidden space-y-2 py-2 ">
+                  <ul id="dropdown-crud" className="collapsible hidden space-y-2 py-2 ">
                     <li>
                       <a
                         href="#"
@@ -264,7 +269,7 @@ export default function SideBar() {
                       />
                     </svg>
                   </button>
-                  <ul id="dropdown-pages" className="hidden py-2 space-y-2">
+                  <ul id="dropdown-pages" className="collapsible hidden py-2 space-y-2">
                     <li>
                       <a
                         href="#"
@@ -338,7 +343,7 @@ export default function SideBar() {
                       />
                     </svg>
                   </button>
-                  <ul id="dropdown-auth" className="hidden py-2 space-y-2">
+                  <ul id="dropdown-auth" className="collapsible hidden py-2 space-y-2">
                     <li>
                       <a
                         href="#"
@@ -423,7 +428,7 @@ export default function SideBar() {
                   </button>
                   <ul
                     id="dropdown-playground"
-                    className="hidden space-y-2 py-2 "
+                    className="collapsible hidden space-y-2 py-2 "
                   >
                     <li>
                       <a

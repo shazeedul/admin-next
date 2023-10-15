@@ -4,6 +4,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./Features/Auth/authSlice";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { authApi } from "./api/authApi";
+import { userApi } from "./api/userApi";
 import {
   persistReducer,
   FLUSH,
@@ -13,7 +14,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { userApi } from "./api/userApi";
 
 const persistConfig = {
   key: "root",
@@ -36,7 +36,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware),
+    }).concat(authApi.middleware, userApi.middleware),
 });
 
 export default store;
