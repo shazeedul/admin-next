@@ -1,6 +1,10 @@
 "use client";
 
+import { clearUser } from "@/app/Redux/Features/Auth/authSlice";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
 
@@ -22,6 +26,17 @@ export default function Navbar() {
         dropdown.classList.remove("hidden");
       }
     }
+  }
+
+  const user = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const signOut = () => {
+    dispatch(clearUser());
+    router.push("/login");
   }
 
   return (
@@ -640,20 +655,15 @@ export default function Navbar() {
               }}
             >
               <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                <div>Bonnie Green</div>
-                <div className="font-medium truncate">name@flowbite.com</div>
+                <div>{user?.name}</div>
+                <div className="font-medium truncate">{user?.email}</div>
               </div>
               <ul
                 className="py-2 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownUserAvatarButton"
               >
                 <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >
-                    Dashboard
-                  </a>
+                  <Link href="/dashboard" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                 </li>
                 <li>
                   <a
@@ -674,8 +684,8 @@ export default function Navbar() {
               </ul>
               <div className="py-2">
                 <a
-                  href="#"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  onClick={signOut}
                 >
                   Sign out
                 </a>
